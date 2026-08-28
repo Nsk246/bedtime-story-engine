@@ -126,7 +126,7 @@ labels at all fixed it outright. It can't leak what it never sees.
 
 ## Limitations
 
-**Factual accuracy isn't guaranteed.** The "curious world" category makes real
+**Factual accuracy isn't guaranteed.** The curious world category makes real
 claims, and the model got the same question wrong in three separate runs — the
 sea is salty because creatures cried into it, then because of a secret cave. The
 planner now has to state the true explanation and the writer can't invent an
@@ -140,7 +140,7 @@ until it looked better would have been dishonest.
 
 **The judge isn't validated.** It's a confident opinion until someone checks it
 against human judgement. Hand-labelling ~30 stories and measuring agreement is
-the first item on the "what I'd build next" list in `main.py`.
+the first item on the what I'd build next list in `main.py`.
 
 **Stories run short**, roughly 60% of target — see above for why I stopped
 fighting it.
@@ -178,9 +178,9 @@ with its original signature.
 
 **No key in this repo.** `.env` is gitignored; `.env.example` shows the shape.
 
-**Time and tooling.** About two hours of hands-on work. I used an LLM heavily to
-generate and refactor code, which is what let me get through five rounds of
-testing in that window — the assignment allows it, and I can explain every line.
+**Time and tooling.** About two hours of hands-on work. I used an LLM  to
+write parts of code and refactor code, which is what let me get through five rounds of
+testing in that window. The assignment allows it, and I can explain every line.
 The parts that took the actual thinking were the prompts, deciding what belongs
 in code versus the model, and reading the story output each round to work out
 what to fix next. The two fixes I'm happiest with, dropping the length gate and
