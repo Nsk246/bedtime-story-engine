@@ -1,0 +1,14 @@
+# never commit the key
+.env
+.env.*
+!.env.example
+
+# run traces contain full prompts and stories
+runs/*.json
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+.DS_Store

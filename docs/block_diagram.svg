@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1080" width="1000" height="1080" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6478"/>
+    </marker>
+    <marker id="arrowDim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#a9a294"/>
+    </marker>
+    <marker id="arrowLoop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b8622a"/>
+    </marker>
+    <style>
+      .box   { fill:#ffffff; stroke:#5b6478; stroke-width:1.6; rx:10; }
+      .io    { fill:#eef2ff; stroke:#4f46e5; stroke-width:1.8; }
+      .judge { fill:#fff7ed; stroke:#b8622a; stroke-width:1.6; }
+      .ref   { fill:#fbfaf6; stroke:#a9a294; stroke-width:1.4; stroke-dasharray:5 4; }
+      .out   { fill:#ecfdf5; stroke:#0f8a5f; stroke-width:1.8; }
+      .panel { fill:#fffdf8; stroke:#b8622a; stroke-width:1.6; stroke-dasharray:6 4; }
+      .t     { font-size:15px; fill:#1a1d26; font-weight:600; }
+      .s     { font-size:12.5px; fill:#5b6478; }
+      .lbl   { font-size:11.5px; fill:#5b6478; font-style:italic; }
+      .lbll  { font-size:11.5px; fill:#b8622a; font-style:italic; font-weight:600; }
+      .num   { font-size:11px; fill:#8a91a3; font-weight:700; letter-spacing:0.06em; }
+      .flow  { fill:none; stroke:#5b6478; stroke-width:1.8; marker-end:url(#arrow); }
+      .dim   { fill:none; stroke:#a9a294; stroke-width:1.4; stroke-dasharray:5 4; marker-end:url(#arrowDim); }
+      .loop  { fill:none; stroke:#b8622a; stroke-width:1.8; marker-end:url(#arrowLoop); }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="1080" fill="#fdfcf9"/>
+  <text x="40" y="44" font-size="21" font-weight="700" fill="#1a1d26">Bedtime Story Engine — system flow</text>
+  <text x="40" y="66" class="s">Every box is one gpt-3.5-turbo call. Temperature is chosen per stage; JSON between stages, prose only in the middle.</text>
+
+  <!-- 1 user request -->
+  <rect class="box io" x="350" y="96" width="300" height="52" rx="10"/>
+  <text x="500" y="120" class="t" text-anchor="middle">Child's request</text>
+  <text x="500" y="138" class="s" text-anchor="middle">free text — “a story about my cat Bob”</text>
+
+  <path class="flow" d="M 500 148 L 500 196"/>
+
+  <!-- 2 intake -->
+  <rect class="box" x="350" y="198" width="300" height="70" rx="10"/>
+  <text x="366" y="218" class="num">STAGE 1</text>
+  <text x="500" y="236" class="t" text-anchor="middle">Intake &amp; Safety Router</text>
+  <text x="500" y="254" class="s" text-anchor="middle">classify · extract · soften · temp 0.0</text>
+  <text x="660" y="240" class="lbl">→ story brief (JSON)</text>
+
+  <path class="flow" d="M 500 268 L 500 316"/>
+
+  <!-- 3 architect -->
+  <rect class="box" x="350" y="318" width="300" height="70" rx="10"/>
+  <text x="366" y="338" class="num">STAGE 2</text>
+  <text x="500" y="356" class="t" text-anchor="middle">Story Architect</text>
+  <text x="500" y="374" class="s" text-anchor="middle">7 beats · refrain · landing · temp 0.9</text>
+  <text x="660" y="360" class="lbl">→ beat sheet (JSON)</text>
+
+  <path class="flow" d="M 500 388 L 500 436"/>
+
+  <!-- 4 storyteller -->
+  <rect class="box" x="350" y="438" width="300" height="70" rx="10"/>
+  <text x="366" y="458" class="num">STAGE 3</text>
+  <text x="500" y="476" class="t" text-anchor="middle">Storyteller</text>
+  <text x="500" y="494" class="s" text-anchor="middle">plan → prose · temp 0.85</text>
+  <text x="660" y="480" class="lbl">→ draft (text)</text>
+
+  <path class="flow" d="M 500 508 L 500 552"/>
+
+  <!-- evaluation panel -->
+  <rect class="panel" x="300" y="554" width="400" height="152" rx="12"/>
+  <text x="316" y="576" class="num">STAGE 4 — EVALUATION PANEL (both calls in parallel)</text>
+  <rect class="box judge" x="318" y="588" width="176" height="100" rx="9"/>
+  <text x="406" y="614" class="t" text-anchor="middle" font-size="14">Rubric Judge</text>
+  <text x="406" y="633" class="s" text-anchor="middle">7 weighted dimensions</text>
+  <text x="406" y="650" class="s" text-anchor="middle">≤3 quoted fixes</text>
+  <text x="406" y="670" class="s" text-anchor="middle">temp 0.0 · never rewrites</text>
+
+  <rect class="box judge" x="506" y="588" width="176" height="100" rx="9"/>
+  <text x="594" y="614" class="t" text-anchor="middle" font-size="14">Test Audience</text>
+  <text x="594" y="633" class="s" text-anchor="middle">simulated 7-year-old</text>
+  <text x="594" y="650" class="s" text-anchor="middle">bored? confused? scared?</text>
+  <text x="594" y="670" class="s" text-anchor="middle">temp 0.7 · catches “dull”</text>
+
+  <path class="flow" d="M 500 706 L 500 748"/>
+  <text x="512" y="732" class="lbl">weighted mean computed in Python, not by the model</text>
+
+  <!-- gate -->
+  <path class="box" d="M 500 750 L 618 800 L 500 850 L 382 800 Z" fill="#ffffff" stroke="#5b6478" stroke-width="1.6"/>
+  <text x="500" y="796" class="t" text-anchor="middle">≥ 4.3, no dim &lt; 4,</text>
+  <text x="500" y="814" class="t" text-anchor="middle">hard checks clean?</text>
+
+  <!-- reviser (right) -->
+  <rect class="box judge" x="738" y="762" width="222" height="76" rx="10"/>
+  <text x="754" y="782" class="num">STAGE 5</text>
+  <text x="849" y="802" class="t" text-anchor="middle" font-size="14">Reviser</text>
+  <text x="849" y="820" class="s" text-anchor="middle">surgical edits only · temp 0.5</text>
+
+  <path class="loop" d="M 618 800 L 736 800"/>
+  <text x="622" y="792" class="lbll">no · revise best (2×)</text>
+  <path class="loop" d="M 849 762 L 849 620 L 684 620"/>
+  <text x="700" y="606" class="lbll">re-graded</text>
+
+  <path class="flow" d="M 500 850 L 500 894"/>
+  <text x="512" y="878" class="lbl">yes</text>
+
+  <!-- champion -->
+  <rect class="box" x="350" y="896" width="300" height="62" rx="10"/>
+  <text x="500" y="921" class="t" text-anchor="middle">Champion Selector</text>
+  <text x="500" y="939" class="s" text-anchor="middle">highest-scoring draft ships, not the last one</text>
+
+  <path class="flow" d="M 500 958 L 500 996"/>
+
+  <!-- output -->
+  <rect class="box out" x="350" y="998" width="300" height="56" rx="10"/>
+  <text x="500" y="1022" class="t" text-anchor="middle">Story read aloud to the child</text>
+  <text x="500" y="1040" class="s" text-anchor="middle">+ scorecard and run trace</text>
+
+  <!-- user feedback loop -->
+  <path class="loop" d="M 650 1026 L 849 1026 L 849 840"/>
+  <text x="664" y="1016" class="lbll">family asks for a change — outranks the judge</text>
+
+  <!-- left reference column -->
+  <rect class="ref" x="40" y="318" width="252" height="70" rx="10"/>
+  <text x="166" y="344" class="t" text-anchor="middle" font-size="14">Strategy Library</text>
+  <text x="166" y="362" class="s" text-anchor="middle">6 categories, 6 different arcs</text>
+  <text x="166" y="378" class="s" text-anchor="middle">adventure · silly · feelings · curious</text>
+  <path class="dim" d="M 292 353 L 348 353"/>
+
+  <rect class="ref" x="40" y="438" width="252" height="70" rx="10"/>
+  <text x="166" y="464" class="t" text-anchor="middle" font-size="14">Style Bible</text>
+  <text x="166" y="482" class="s" text-anchor="middle">one shared spec: sentence length,</text>
+  <text x="166" y="498" class="s" text-anchor="middle">fear budget, the sleepy landing</text>
+  <path class="dim" d="M 292 473 L 348 473"/>
+  <text x="46" y="526" class="lbl">the judge grades against this same</text>
+  <text x="46" y="542" class="lbl">spec, so critique is actionable</text>
+
+  <rect class="ref" x="40" y="566" width="252" height="104" rx="10"/>
+  <text x="166" y="592" class="t" text-anchor="middle" font-size="14">Hard Checks (pure Python)</text>
+  <text x="166" y="612" class="s" text-anchor="middle">word count · refrain used 3&#215;?</text>
+  <text x="166" y="628" class="s" text-anchor="middle">sentences over 28 words</text>
+  <text x="166" y="644" class="s" text-anchor="middle">stated-moral phrases</text>
+  <text x="166" y="662" class="s" text-anchor="middle" font-style="italic">counted, never guessed</text>
+  <path class="dim" d="M 292 618 L 314 618"/>
+  <text x="46" y="692" class="lbl">failures are fed to the judge as</text>
+  <text x="46" y="708" class="lbl">fact, prepended to the fix list,</text>
+  <text x="46" y="724" class="lbl">and hold the gate shut on their own</text>
+
+  <rect class="ref" x="40" y="896" width="252" height="62" rx="10"/>
+  <text x="166" y="920" class="t" text-anchor="middle" font-size="14">Run Trace (JSON)</text>
+  <text x="166" y="938" class="s" text-anchor="middle">every prompt, score and revision</text>
+  <path class="dim" d="M 348 927 L 294 927"/>
+
+  <!-- intake side note -->
+  <text x="40" y="222" class="lbl">unsafe requests are softened,</text>
+  <text x="40" y="238" class="lbl">never refused — the wolf stays,</text>
+  <text x="40" y="254" class="lbl">the teeth go</text>
+  <path class="dim" d="M 292 233 L 348 233"/>
+</svg>
